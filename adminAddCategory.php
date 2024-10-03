@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="style.css" rel="stylesheet" type="text/css"/>
+    <link href="main.css" rel="stylesheet" type="text/css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
@@ -79,14 +80,14 @@
     <div class="row">
         <div class="col-sm-4"> </div>
         <div class="col-sm-4">
+            <h3 class="card-title text-center">เพิ่มหมวดหมู่</h3>
             <form  method="post">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title text-center">เพิ่มหมวดหมู่</h5>  
+            <div class="boxcard">
+                <div class="card-body"> 
                     <p class="card-text">
                         <label for="categoryName" class="mb-2 col-form-label">ชื่อหมวดหมู่</label>
                         <input type="text" name="categoryName" id="categoryName" class="form-control" placeholder="Enter Category Name"  >
-                        <button type="submit" class="btn btn-success w-100 mt-2 mb-2">เพิ่ม</button>
+                        <button type="submit" class="btn btn-warning text-dark w-100 mt-3 mb-3 rounded-pill">เพิ่ม</button>
                     </p>
                 </div>
             </div>
