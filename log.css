@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Prompt:wght@300;400;600;700&display=swap');
+
+*{
+    font-family: "Poppins", system-ui;
+    font-family: "Prompt", sans-serif;
+}
+
+.Logo {
+    font-weight: 600;
+    font-size: 40px;
+}
+
+.form-control {
+    height: 50px;
+}
+
+.card-body {
+    background-color: #FAF7F0;
+    border: 1px solid #000;
+    border-radius: 20px;
+}
+
+.btn-login {
+    background-color: #F0A04B;
+    border-radius: 30px;
+}
+
+.createloing {
+    text-decoration: none;
+    color: #FAF7F0;
+}
+
+.bgc {
+    background-color: #F0A04B;
+}
+
+.bgc a {
+    text-decoration: none;
+    color: #E1EEDD;
+}

@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Prompt:wght@300;400;600;700&display=swap');
+
+
+body {
+    margin: 0;
+    background-color: black;
+}
+
+*{
+    font-family: "Poppins", system-ui;
+    font-family: "Prompt", sans-serif;
+}
+
+.cattt {
+    margin-bottom: 10px;
+}
+
+.cattt h5 {
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 50px;
+    font-family: "Poppins", system-ui;
+}
+
+.bloggg h5 {
+    font-weight: 600;
+    font-size: 50px;
+    font-family: "Poppins", system-ui;
+}
+
+@media only screen and (max-width: 2000px) {
+    .sd {
+        border-radius: 30px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 300px;
+        height: 48px;
+        box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+        background-color: #F0A04B;
+    
+    }
+}
+
+.sd a {
+    font-size: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 8px;
+}
+
+.boxcard {
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    border: 2px solid #000;
+    background-color: #FAF7F0;
+    transition: transform 0.6s ease;
+}
+
+.boxcard:hover {
+    transform: translateY(-5px);
+}
+
+.singuppp a {
+    text-decoration: none;
+}
+
+.heal h5 {
+    font-size: 40px;
+}
+
+.btnone{
+    transition: transform 0.6s ease;
+}
+
+.btnone:hover {
+    transform: translateY(-5px);
+}
