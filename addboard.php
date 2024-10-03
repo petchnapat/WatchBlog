@@ -13,7 +13,6 @@
     <?php 
             require 'db/db_connect.php';
             connect();
-            
             $sql1 = 'SELECT * FROM category';
             $result1 = mysqli_query($GLOBALS['conn'],$sql1);
             if(isset($_POST['categoryID'])) {
@@ -32,7 +31,6 @@
                         });
                     </script>';
                     }else{
-                        
                         $boardHeader = $_POST['boardHeader'];
                         $boardBody = $_POST['boardBody'];
                         $userID = $_SESSION['userID'];
@@ -80,7 +78,7 @@
                             }
                         }else{
                              // Add board without Images
-                            $sql2 = 'INSERT INTO board (boardHeader,boardBody,userID,catego ryID,boardDate,boardTime) VALUES 
+                            $sql2 = 'INSERT INTO board (boardHeader,boardBody,userID,categoryID,boardDate,boardTime) VALUES 
                             ("'.$_POST['boardHeader'].'",
                             "'.$_POST['boardBody'].'",
                             '.$_SESSION['userID'].',
@@ -105,24 +103,18 @@
                         }
                     }
             }
-
-
     ?>
 </head>
 <body>
     <?php require 'req/navbar.php' ?>
-    <div class="container-fluid mt-5 mb-2 ">
+    <div class="container-fluid mb-2 ">
     <form method="post" enctype="multipart/form-data">
         <div class="row mt-4 ">
             <div class="col-lg-3 "> 
             </div>
-                    
             <div class="col-lg-6">
-
             <h3 class="card-title text-center ">เพิ่มบอร์ด</h3>
-
                 <div class="boxcard">
-                    
                     <div class="card-body">
                         <p class="card-text form-inline">
                             <div class="mb-3 row">
@@ -131,14 +123,12 @@
                                 <input type="text"  class="form-control " id="boardHeader" name="boardHeader" placeholder="Enter Board Header" value="" >
                                 </div>
                             </div>
-
                             <div class="mb-3 row">
                                 <label for="userPassword" class="col-sm-3 col-form-label" >เนื้อหาบอร์ด</label>
                                 <div class="col-sm-12">
                                 <textarea class="form-control" name="boardBody" id="boardBody" aria-label="With textarea" placeholder="Enter Board Body"></textarea>
                                 </div>
                             </div>
-
                             <div class="input-group mb-3 ">
                                 <label class="input-group-text" for="categoryID">เลือกหมวดหมู่</label>
                                 <select class="form-select" id="categoryID" name="categoryID">
@@ -154,15 +144,11 @@
                             </div>
                             <div class="row ">
                                 <div class="col-sm-12"> <button type="submit" class="btn btn-warning w-100" >โพสต์บอด</button></div>
-                                   
                             </div>
-                            
                         </p>
                     </div>
                 </div>
-            
             </div>
-
             <div class="col-lg-3"> </div>
             </form>
         </div>

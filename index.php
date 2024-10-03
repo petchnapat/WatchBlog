@@ -28,26 +28,34 @@ connect();
             </script>'; 
         unset($_SESSION['delete']);
     }
+    if(isset($_POST['all'])){
+        $sql = 'SELECT users.userID, users.firstName , users.lastName ,
+        board.boardID, board.boardHeader, board.boardBody ,board.boardImage , board.boardDate, board.boardTime ,
+        category.categoryName 
+        FROM board INNER JOIN users ON users.userID = board.userID 
+        INNER JOIN category ON category.categoryID = board.categoryID  
+        ORDER BY board.boardDate DESC , board.boardTime DESC';
+        $text = 'Blog All';
+    } else {
+        $sql = 'SELECT users.userID, users.firstName , users.lastName ,
+        board.boardID, board.boardHeader, board.boardBody ,board.boardImage , board.boardDate, board.boardTime ,
+        category.categoryName 
+        FROM board INNER JOIN users ON users.userID = board.userID 
+        INNER JOIN category ON category.categoryID = board.categoryID  
+        ORDER BY board.boardDate DESC , board.boardTime DESC LIMIT 0,10 ';
+        $text = 'Blog Today';
+    }
     
-    $board['img']='';
-    $sql = 'SELECT users.userID, users.firstName , users.lastName ,
-    board.boardID, board.boardHeader, board.boardBody ,board.boardImage , board.boardDate, board.boardTime ,
-    category.categoryName 
-    FROM board INNER JOIN users ON users.userID = board.userID 
-    INNER JOIN category ON category.categoryID = board.categoryID 
-    ORDER BY board.boardDate DESC , board.boardTime DESC ';
     $boardResult = mysqli_query($GLOBALS['conn'],$sql);
     $categorySQL =  'SELECT *FROM category ';
     $category = mysqli_query($GLOBALS['conn'],$categorySQL);
-   
 ?>
 </head>
 <body>
     <?php require 'req/navbar.php' ?>
     
-    <div class="container-fluid mb-2">
+    <div class="container-fluid  mb-2">
         <div class="row">
-
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
                 <div class="cattt">
@@ -57,8 +65,8 @@ connect();
                     <?php while($cate = $category->fetch_assoc()){ ?>
                     <div class="col-sm-3">
 
-                    <div class="btnone">
-                    <a href="boardCategory.php?categoryID=<?php echo $cate['categoryID'] ?>" class="btn text-light btn-lg w-100 rounded-pill bg-warning" name="category<?php echo $cate['categoryID'] ?>"  > 
+                    <div class="btnonee">
+                    <a href="boardCategory.php?categoryID=<?php echo $cate['categoryID'] ?>" class="btnone btn text-light btn-lg w-100 rounded-pill bg-warning mt-3" name="category<?php echo $cate['categoryID'] ?>"  > 
                         <?php echo $cate['categoryName'] ?>
                     </a>
                     </div>
@@ -70,13 +78,13 @@ connect();
           
             <div class="col-sm-2"></div>
         </div>
-    <div class="row">
-        <div class="col-sm-2"></div>
-            <div class="col-sm-8 mt-3">
-                <div class="bloggg">
-                    <h5 class="">Blog Today</h5>
+        <div class="row">
+            <div class="col-sm-2"></div>
+                <div class="col-sm-8 mt-3">
+                    <div class="bloggg">
+                        <h5 class=""><?php echo $text ?></h5>
+                    </div>
                 </div>
-            </div>
     
         <div class="row  mt-2 mb-2">
             <div class="col-sm-2"></div>
@@ -216,16 +224,16 @@ connect();
                 </div> 
             </div>
             <div class="col-lg-2"></div> 
-        </div>
-        <div class="row text-center">
-            <div class="col-sm-4 "></div>
-            <div class="col-sm-4">
-                <!-- <a href="#" class=" text-decoration-none btn-sm btn-primary disable">แสดงบอร์ดทั้งหมด</a> -->
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <form method="post">
+                    <input type="hidden" id="all" name="all" value="1" >
+                    <button type="submit" class=" btn text-light btn-lg w-100 rounded-pill bg-warning">แสดงบอร์ดทั้งหมด</button>
+                </form>
             </div>
-            <div class="col-sm-4"></div>
+            <div class="col-sm-2"></div>
         </div>
-    </div>
-    
+        </div>
     <?php require 'req/footer.php' ?>
 </body>
 </html>

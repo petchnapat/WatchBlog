@@ -1,5 +1,10 @@
+<style>
+.footer {
+  background-color: #F0A04B;
+}
+</style>
 <!-- Footer -->
-<footer class="text-center text-white mt-auto" style="background-color: #F0A04B;">
+<footer class="text-center footer text-white mt-auto fix-bottom">
     <!-- Copyright -->
     <div class="text-center p-3" style="">
       © TEAM :

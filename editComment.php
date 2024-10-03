@@ -14,69 +14,85 @@
             require 'db/db_connect.php';
             connect();
                 
-                 $commentID = $_GET['commentID'];
-                 $userID = $_GET['userID'];
-                 $boardID = $_GET['boardID'];   
-                 if(!isset($_SESSION['userID'])){
-                    header( "refresh:0; url=index.php" );
-                 }else if($_SESSION['userID'] != $_GET['userID'] && $_SESSION['userRole'] != 1 ){
-                    header( "refresh:0; url=boardDetail.php?boardID= $boardID" );
-                 }
-                 // Gete commentDetail Data
-                 $commentSQL = 'SELECT * FROM comment WHERE commentID = ? AND userID = ? ' ;
-                 $preparecommentSQL = $GLOBALS['conn']->prepare($commentSQL);
-                 $preparecommentSQL->bind_param("ii",$commentID,$userID);
-                 $preparecommentSQL->execute();
-                 $result = $preparecommentSQL->get_result();
-                 $data = $result->fetch_assoc();
-                 $preparecommentSQL->close();
-                 
-                 if(isset($_POST['editcommentDetail'])){
+            if(empty($_GET) || !isset($_SESSION['userID']) ){
+                header( "refresh:0; url=index.php" );
+            } else if($_SESSION['userID'] != $_GET['userID'] && $_SESSION['userRole'] != 1 ){
+                header( "refresh:0; url=boardDetail.php?boardID= $boardID" );
+             }else if (@$_GET['delete'] == 1) {
+                    $deleteCommentSQL = 'DELETE FROM comment WHERE commentID = ?';
+                    $commentID = $_GET['commentID'];
+                    $preparedeleteCommentSQL = $GLOBALS['conn']->prepare($deleteCommentSQL);
+                    $preparedeleteCommentSQL->bind_param("i",$commentID);
+                    $preparedeleteCommentSQL->execute();
+                    $preparedeleteCommentSQL->close();
+                    $_SESSION['delete'] = true;
+                    header('refresh:0 ; url= adminComment.php');
+                   
+             }else {
+                $commentID = $_GET['commentID'];
+                $userID = $_GET['userID'];
+                $boardID = $_GET['boardID'];   
+                    // Gete commentDetail Data
+                    $commentSQL = 'SELECT comment.*,users.firstName,users.lastName  
+                    FROM comment JOIN users ON comment.userID = users.userID
+                    WHERE comment.commentID = ? AND users.userID = ? ' ;
+                    $preparecommentSQL = $GLOBALS['conn']->prepare($commentSQL);
+                    $preparecommentSQL->bind_param("ii",$commentID,$userID);
+                    $preparecommentSQL->execute();
+                    $result = $preparecommentSQL->get_result();
+                    $data = $result->fetch_assoc();
+                    $preparecommentSQL->close();
+
+                    if(isset($_POST['editcommentDetail'])){
                     $commentDetail = $_POST['editcommentDetail'];
                     if($_POST['editcommentDetail']==''){
-                        echo ' <script>
-                        $(function() {
-                            Swal.fire({
-                                showCancelButton: true,
-                                showConfirmButton: false,
-                                cancelButtonText: "ปิด",
-                                title: "เกิดข้อผิดพลาด !",
-                                text: "คอมเม้นไม่สามารถเป็นค่าว่างได้!",
-                                icon: "error"
-                            });
-                        });
-                        </script>';
+                    echo ' <script>
+                    $(function() {
+                    Swal.fire({
+                    showCancelButton: true,
+                    showConfirmButton: false,
+                    cancelButtonText: "ปิด",
+                    title: "เกิดข้อผิดพลาด !",
+                    text: "คอมเม้นไม่สามารถเป็นค่าว่างได้!",
+                    icon: "error"
+                    });
+                    });
+                    </script>';
                     }else{    
                     $editcommnetSQL = 'UPDATE comment SET commentDetail = ? WHERE commentID = ? ';
                     $prepareeditcommnetSQL = $GLOBALS['conn']->prepare($editcommnetSQL);
                     $prepareeditcommnetSQL->bind_param("si",$commentDetail,$commentID);
                     $prepareeditcommnetSQL->execute();
                     echo ' <script>
-                        $(function() {
-                            Swal.fire({
-                                showCancelButton: true,
-                                showConfirmButton: false,
-                                cancelButtonText: "ปิด",
-                                title: "แก้ไขคอมเม้นสำเร็จ !",
-                                text: "กรุณารอสักครู่!",
-                                icon: "success"
-                            });
-                        });
+                    $(function() {
+                    Swal.fire({
+                    showCancelButton: true,
+                    showConfirmButton: false,
+                    cancelButtonText: "ปิด",
+                    title: "แก้ไขคอมเม้นสำเร็จ !",
+                    text: "กรุณารอสักครู่!",
+                    icon: "success"
+                    });
+                    });
                     </script>';
                     $prepareeditcommnetSQL->close();
                     if(@$_GET['admin']==1) {
-                        header("refresh:2; url=adminComment.php");
+                    header("refresh:2; url=adminComment.php");
                     }else{
-                        header("refresh:2; url=boardDetail.php?boardID= $boardID");
+                    header("refresh:2; url=boardDetail.php?boardID= $boardID");
+                    }
+
                     }
                     
-                    }
-                 }
+               }
+               
+             }
 
     ?>
 </head>
 <body>
     <?php require 'req/navbar.php' ?>
+    <?php if(@$_GET['delete'] != 1 ) {  ?>
     <div class="container-fluid mt-5 mb-2 ">
     <form method="post">
         <div class="row mt-4 ">
@@ -100,5 +116,6 @@
         </div>
     </form>
     </div>
+    <?php } ?>
     </body>
 </html>

@@ -28,6 +28,7 @@
                     </script>'; 
                 unset($_SESSION['delete']);
             }
+            
             $boardID = $_GET['boardID'];
             $boardSql = 'SELECT board.boardHeader, board.boardBody,board.userID AS userBoardID, board.categoryID,board.boardImage,board.boardDate,board.boardTime ,
                     users.firstName AS userBoardFirstName , users.lastName AS userBoardLastName , users.userImage ,
@@ -98,14 +99,13 @@
 </head>
 <body>
     <?php require 'req/navbar.php' ?>
-    <div class="container-fluid mt-5 mb-2 ">
+    <div class="container-fluid mb-2 ">
     <form method="post" enctype="multipart/form-data">
         <div class="row mt-4 mb-4 ">
             <div class="col-lg-3 "> 
             </div>
             <!-- Board -->
             <div class="col-lg-6">
-            <h4 class="card-title text-center ">บอร์ดหมายเลข <?php echo $boardID ?></h4>
                 <div class="boxcard">
                     <div class="card-body">
                         <p class="card-text form-inline">
@@ -286,7 +286,7 @@
                                 </div> <br>
                                 <p class="card-text mb-1"> หมายเลขสมาชิก : 
                                 <?php if($userData['userImage']!=null) { ?>
-                                <img src="img/userImg/<?php echo $user['userImage'] ?>" width="30px" class="rounded-circle" height="30px" alt="">
+                                <img src="img/userImg/<?php echo $userData['userImage'] ?>" width="30px" class="rounded-circle" height="30px" alt="">
                                 <?php } else { ?>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>

@@ -22,16 +22,28 @@
             // echo 123;
         }
         if(@$_GET['d']==1){
-                    $_SESSION['delete'] = true;
+                   
                     $categoryID = $_GET['categoryID'];
-                    $deleteSQL = 'DELETE FROM category WHERE categoryID = ?';
-                    $preparedeleteSQL = $GLOBALS['conn']->prepare($deleteSQL);
-                    $preparedeleteSQL->bind_param("i",$categoryID);
-                     $preparedeleteSQL->execute();
-                     $preparedeleteSQL->close();
-                    header('refresh:0; url=adminCategory.php');
+                    $checkCategorySQL = 'SELECT * FROM board WHERE categoryID = ?';
+                    $preparecheckCategorySQL = $GLOBALS['conn']->prepare($checkCategorySQL);
+                    $preparecheckCategorySQL->bind_param("i", $categoryID);
+                    $preparecheckCategorySQL->execute();
+                    $Checkresult = $preparecheckCategorySQL->get_result();
+                    $preparecheckCategorySQL->close();
+                    if($Checkresult->num_rows > 0){
+                        $_SESSION['delete'] = 2;
+                        header('refresh:0; url=adminCategory.php');
+                    }else{
+                        $_SESSION['delete'] = true;
+                        $deleteSQL = 'DELETE FROM category WHERE categoryID = ?';
+                        $preparedeleteSQL = $GLOBALS['conn']->prepare($deleteSQL);
+                        $preparedeleteSQL->bind_param("i",$categoryID);
+                        $preparedeleteSQL->execute();
+                         $preparedeleteSQL->close();
+                        header('refresh:0; url=adminCategory.php');
+                    }
+                   
         }else{
-            
         $categoryID = $_GET['categoryID'];
         $categorySQL = 'SELECT * FROM category WHERE categoryID = ? ';
         $preparecatgorySQL = $GLOBALS['conn']->prepare($categorySQL);
@@ -82,13 +94,14 @@
 <body>
   
     <?php require 'req/navbar.php' ?>
+    <?php if(@$_GET['d'] != 1 ) {  ?>
     <div class="container-fluid  mt-3 mb-2">
     <div class="row">
         <div class="col-sm-4"> </div>
         <div class="col-sm-4">
         <h3 class="card-title text-center">แก้ไขหมวดหมู่</h3>  
             <form  method="post">
-            <div class="boxcard">
+            <div class="boxcard mt-3">
                 <div class="card-body">
                     <p class="card-text">
                         <label for="categoryName" class="mb-2 col-form-label">ชื่อหมวดหมู่</label>
@@ -101,5 +114,6 @@
         </div>
     </div>
     </div>
-</body>
+    <?php } ?>
+</body> 
 </html>

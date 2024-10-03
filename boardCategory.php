@@ -78,8 +78,8 @@ connect();
                     <?php while($cate = $category->fetch_assoc()){ ?>
                     <div class="col-sm-3">
 
-                    <div class="btnone">
-                    <a href="boardCategory.php?categoryID=<?php echo $cate['categoryID'] ?>" class="btn text-light btn-lg w-100 rounded-pill bg-warning" name="category<?php echo $cate['categoryID'] ?>"  > 
+                    <div class="btnonee">
+                    <a href="boardCategory.php?categoryID=<?php echo $cate['categoryID'] ?>" class="btnone btn text-light btn-lg w-100 rounded-pill bg-warning" name="category<?php echo $cate['categoryID'] ?>"  > 
                         <?php echo $cate['categoryName'] ?>
                     </a>
                     </div>

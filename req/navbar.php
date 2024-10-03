@@ -12,7 +12,21 @@
 }
 
 ?>
-<nav class="navbar navbar-expand-lg sticky-top">
+  <style>
+    @media only screen and (max-width: 992px) {
+    .collapse-fix {
+      padding: 10px;
+      background-color: #FAF7F0;
+      border: 1px solid #000;
+      border-radius: 20px;
+    }
+    .navbar-toggler{
+      background-color: #FAF7F0;
+      border: 0;
+    }
+  }
+  </style>
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
   <div class="container-fluid"> 
       <div class="logobtn">
         <a href="index.php"><img src="img/blog2.png" alt=""></a>
@@ -20,12 +34,8 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse collapse-fix" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <!-- <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.php">หน้าแรก</a>
-        </li> -->
-        <!-- search --> 
       <li class="nav-item">
           <form action="search.php" method="POST" class="d-flex me-3 mt-.5">
             <input class="form-control me-2 rounded-pill border border-warning" type="search" id="search" name="search" placeholder="Search" aria-label="Search">
@@ -33,9 +43,8 @@
           </form>
       </li>
         <?php if(isset($_SESSION['userID'])) { ?>
-
         <li class="nav-item">
-          <a class="nav-link active text-dark" aria-current="page" href="addboard.php">โพสต์บอด</a>
+          <a class="nav-link active text-dark" aria-current="page" href="addboard.php">โพสต์บล็อค</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-dark " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -48,23 +57,18 @@
               <img src="img/userImg/<?php echo $user['userImage']; ?>" width="25px" height="25px" class="rounded-circle">
               <?php } ?>
             <?php if(isset($_SESSION['userID'])) { echo $user['firstName']; } else { echo 'Profile'; } ?>
-            
           </a>
           
           <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="navbarDropdown">
-          
             <li><a class="dropdown-item" href="profile.php">ข้อมูลส่วนตัว</a></li>
             <li><a class="dropdown-item" href="myboard.php">กระทู้ของฉัน</a></li>
-
             <?php if($user['userRole']==1) { ?>
             <div class="dropdown-divider"></div>
             <div class="li "><a href="adminUser.php"  class="dropdown-item ml-3"> ผู้ดูแลระบบ </a></div>
             <?php } ?>
             <div class="dropdown-divider"></div>
             <div class="li "><a href="logout.php"  class="dropdown-item  ml-3"> ออกจากระบบ </a></div>
-            
           </ul>
-          
         </li>
         <?php } ?>
         <li class="nav-item justify-content-end">
@@ -75,7 +79,6 @@
             <?php } ?>
         </li> 
       </ul>
-      
     </div>
   </div>
 </nav>

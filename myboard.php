@@ -56,13 +56,17 @@ if(empty($_GET) AND $_SESSION['userID'] == ''){
                     <div class="col-sm-2"></div>
                     <div class="col-sm-8 row">
                     <?php while($cate = $result1->fetch_assoc()){ ?>
+
                     <div class="col-sm-3">
-                    <a href="myboardCategory.php?userID=<?php if(@$_GET['userID'] != '') {
-                    echo $_GET['userID'];     } else{ echo $userID; }
-                    ?>&categoryID=<?php echo $cate['categoryID'] ?>" class="btn text-light btn-lg w-100 rounded-pill bg-warning" name="category<?php echo $cate['categoryID'] ?>"  > 
-                    <?php echo $cate['categoryName'] ?>
-                    </a>
+                        <div class="btnone">
+                        <a href="myboardCategory.php?userID=<?php if(@$_GET['userID'] != '') {
+                        echo $_GET['userID'];     } else{ echo $userID; }
+                        ?>&categoryID=<?php echo $cate['categoryID'] ?>" class="btn text-light btn-lg w-100 rounded-pill bg-warning " name="category<?php echo $cate['categoryID'] ?>"  > 
+                        <?php echo $cate['categoryName'] ?>
+                        </a>
+                     </div>
                     </div>
+
                     <?php } ?> 
                     </div>
                     <div class="col-sm-2"></div>
@@ -87,7 +91,7 @@ if(empty($_GET) AND $_SESSION['userID'] == ''){
                             </div>
                             <div class="col-sm-9">
                             <h5 class="text-start mt-2 mb-1"><?php echo $data['boardHeader'] ?> 
-                                <?php if(@$_SESSION['userID'] == $userID ||  @$_SESSION['userRole'] == 1 ) { ?>
+                                <?php if(@$_SESSION['userID'] == $userID ||  @$_SESSION['userRole'] == 1  )  { ?>
                                 <a href="editBoard.php?boardID=<?php echo $data['boardID']; ?>" class="btn btn-sm btn-outline-success ">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -137,6 +141,7 @@ if(empty($_GET) AND $_SESSION['userID'] == ''){
                             <div class="row">
                             <div class="col-sm-12">
                                 <h5 class="text-start mt-2 mb-1"><?php echo $data['boardHeader'] ?> 
+                                <?php if(@$_SESSION['userID'] == $userID ||  @$_SESSION['userRole'] == 1  )  { ?>
                                 <a href="editBoard.php?boardID=<?php echo $data['boardID']; ?>" class="btn btn-sm btn-outline-success ">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -149,6 +154,7 @@ if(empty($_GET) AND $_SESSION['userID'] == ''){
                                             <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
                                         </svg>
                                     </button>
+                                    <?php } ?>
                                 </h5>
                                 <p class="text-start mb-1">Category : <?php echo $category['categoryName']; ?>
                             </p>

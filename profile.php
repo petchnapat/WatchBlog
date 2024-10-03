@@ -48,7 +48,7 @@
 <body>
     <?php require 'req/navbar.php';  ?>
 
-    <div class="container-fluid mt-5 mb-2">
+    <div class="container-fluid mb-2">
         <div class="row mt-4">
             <div class="col-lg-4 "> 
             </div>

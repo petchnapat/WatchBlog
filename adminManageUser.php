@@ -20,16 +20,42 @@
             }else if(empty($_GET)) {
                 header('refresh:0;url=adminUser.php');
             }else if (@$_GET['d']==1){ 
-                $deleteSQL = 'DELETE FROM users WHERE userID = ? ';
-                $preapredeleteSQL = $GLOBALS['conn']->prepare($deleteSQL);
-                $preapredeleteSQL->bind_param("i",$_GET['userID']);
-                $preapredeleteSQL->execute();
+                // GET boardID FOR Delete
+                $selectBoardSQL  = 'SELECT boardID FROM board WHERE userID = ?  ';
+                $prepareselectBoardSQL = $GLOBALS['conn']->prepare($selectBoardSQL);
+                $prepareselectBoardSQL->bind_param("i",$_GET['userID']);
+                $prepareselectBoardSQL->execute();
+                $boardresult = $prepareselectBoardSQL->get_result();
+                $prepareselectBoardSQL->close();
+                // Delete Comment
+               while( $dataBoardID = $boardresult->fetch_assoc()){
+                $boardID = $dataBoardID['boardID'];
+                $deleteCommentSQL = 'DELETE  FROM comment 
+                WHERE userID = ? || boardID = ?';
+                $preapredeleteCommentSQL = $GLOBALS['conn']->prepare($deleteCommentSQL);
+                $preapredeleteCommentSQL->bind_param("ii",$_GET['userID'],$boardID);
+                $preapredeleteCommentSQL->execute();
+                $preapredeleteCommentSQL->close();
+               }
+               
+                // Delete Board
+                $deleteBoardSQL = 'DELETE  FROM board 
+                WHERE userID = ?';
+                $preapredeleteBoardSQL = $GLOBALS['conn']->prepare($deleteBoardSQL);
+                $preapredeleteBoardSQL->bind_param("i",$_GET['userID']);
+                $preapredeleteBoardSQL->execute();
+                $preapredeleteBoardSQL->close();
+                // Delete Users
+                $deleteUserSQL = 'DELETE  FROM users 
+                WHERE userID = ?';
+                $preapredeleteUserSQL = $GLOBALS['conn']->prepare($deleteUserSQL);
+                $preapredeleteUserSQL->bind_param("i",$_GET['userID']);
+                $preapredeleteUserSQL->execute();
+                $preapredeleteUserSQL->close();
                 $_SESSION['delete'] = true;
-                $preapredeleteSQL->close();
                 header('refresh:0;url=adminUser.php');
             }else{
                 $userID = $_GET['userID'];
-                
                 if(isset($_POST['email'])){
                     $email = $_POST['email'];
                     $firstName = $_POST['firstName'];
@@ -146,6 +172,7 @@
     $preapreuserSQL->close();
     //print_r($user);
      ?>
+     <?php if (@$_GET['d'] != 1) { ?>
     <div class="container-fluid mt-5 mb-2">
     <form method="post">
         <div class="row mt-4">
@@ -209,5 +236,6 @@
             </form>
         </div>
     </div>
+    <?php } ?>
     </body>
 </html>

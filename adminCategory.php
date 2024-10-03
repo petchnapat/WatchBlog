@@ -18,25 +18,36 @@
     <?php 
       require 'db/db_connect.php';
       connect();
-        if($_SESSION['userRole']!=1){
-          header('refresh:0; url=index.php');
-          }else if(@$_SESSION['delete']==1){
-            echo ' <script>
-                                    $(function() {
-                                        Swal.fire({
-                                            showCancelButton: true,
-                                            showConfirmButton: false,
-                                            cancelButtonText: "ปิด",
-                                            title: "ลบหมวดหมู่สำเร็จ !",
-                                            text: " ",
-                                            icon: "success"
-                                        });
-                                    });
-                                </script>';
-            unset($_SESSION['delete']);
-          }else{
-
-          }
+      if($_SESSION['userRole']!=1){
+        header('refresh:0; url=index.php');
+        }else if(@$_SESSION['delete']==1){
+          echo ' <script>
+                                  $(function() {
+                                      Swal.fire({
+                                          showCancelButton: true,
+                                          showConfirmButton: false,
+                                          cancelButtonText: "ปิด",
+                                          title: "ลบหมวดหมู่สำเร็จ !",
+                                          text: " ",
+                                          icon: "success"
+                                      });
+                                  });
+                              </script>';
+          unset($_SESSION['delete']);
+        }else if(@$_SESSION['delete']==2){
+          echo ' <script>
+                                  $(function() {
+                                      Swal.fire({
+                                          showCancelButton: true,
+                                          showConfirmButton: false,
+                                          cancelButtonText: "ปิด",
+                                          title: "เกิดข้อผิดผลาด !",
+                                          text: "ไม่สามารถลบหมวดหมู่ที่ถูกใช้งานได้",
+                                          icon: "error"
+                                      });
+                                  });
+                              </script>';
+        }
       ?>
 </head>
 <body>
@@ -107,12 +118,8 @@
                           </button>
                       </td>
                       </tr>
-                      <?php  } } else { ?>
-                        <tr><td>ไม่พบข้อมูล</td></tr>
-                        <?php } ?>
-                    </tbody>
-                     <!-- Modal Board Delete Comment -->
-                                      <div class="modal fade" id="deboard<?php echo $category['categoryID'] ?>" tabindex="-1" aria-labelledby="commnetLabel" aria-hidden="true">
+                       <!-- Modal Board Delete Comment -->
+                       <div class="modal fade" id="deboard<?php echo $category['categoryID'] ?>" tabindex="-1" aria-labelledby="commnetLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -130,6 +137,11 @@
                                             </div>
                                         </div>
                                         </div>
+                      <?php  } } else { ?>
+                        <tr><td>ไม่พบข้อมูล</td></tr>
+                        <?php } ?>
+                    </tbody>
+                    
                     
                   </table>
            </div>
