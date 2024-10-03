@@ -44,8 +44,10 @@ connect();
 </head>
 <body>
     <?php require 'req/navbar.php' ?>
+    
     <div class="container-fluid mb-2">
         <div class="row">
+
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
                 <div class="cattt">
