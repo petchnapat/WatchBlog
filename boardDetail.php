@@ -110,7 +110,7 @@
                     <div class="card-body">
                         <p class="card-text form-inline">
                             <div class="mb-3 row">
-                            <label for="email" class="col-sm-3 col-form-label text-while">ห้วข้อบอร์ด</label>
+                            <label for="email" class="col-sm-3 col-form-label text-while">ห้วข้อบล็อด</label>
                                 <h5 class="text-start"><?php echo $board['boardHeader'] ?></h5>
                             </div>
                             <?php if($board['boardImage']!=null) { ?>
@@ -126,7 +126,7 @@
                             </div>
                             <?php } ?>
                             <div class="mb-3 row">
-                                <label for="userPassword" class="col-sm-3 col-form-label" >เนื้อหาบอร์ด</label>
+                                <label for="userPassword" class="col-sm-3 col-form-label" >เนื้อหาบล็อด</label>
                                 <div class="col-sm-12">
                                 <span disabled class="form-control" name="boardBody" id="boardBody" diabled  
                                 placeholder="Enter Board Body"><?php echo nl2br(htmlspecialchars($board['boardBody'])); ?></span>
@@ -251,7 +251,7 @@
                                                     </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-                                                    <a href="editComment.php?commentID=<?php echo $data['commentID'] ?>&userID=<?php echo $data['userID'] ?>&boardID=<?php echo $boardID ?>"  class="btn btn-primary">แก้ไข</a>
+                                                    <a href="editComment.php?commentID=<?php echo $data['commentID'] ?>&userID=<?php echo $data['userID'] ?>&boardID=<?php echo $boardID ?>"  class="btn btn-warning text-light">แก้ไข</a>
                                                 </div>
                                             </div>
                                         </div>

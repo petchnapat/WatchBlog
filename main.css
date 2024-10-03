@@ -13,14 +13,14 @@
 
 .cattt h5 {
     margin-top: 20px;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 50px;
     font-family: "Poppins", system-ui;
 }
 
 .bloggg h5 {
     margin-top: 10px;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 50px;
     font-family: "Poppins", system-ui;
 }
@@ -49,9 +49,9 @@
 
 .boxcard {
     border-radius: 10px;
-    box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.1);
     margin-bottom: 30px;
-    border: 2px solid #000;
+    border: 1px solid #000;
     background-color: #FAF7F0;
    
 }

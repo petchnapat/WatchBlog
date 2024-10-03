@@ -37,9 +37,11 @@
     <div class="collapse navbar-collapse collapse-fix" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
       <li class="nav-item">
-          <form action="search.php" method="POST" class="d-flex me-3 mt-.5">
+          <form action="search.php" method="POST" class="d-flex me-1 mt-.5">
             <input class="form-control me-2 rounded-pill border border-warning" type="search" id="search" name="search" placeholder="Search" aria-label="Search">
-            <button button class="btn btn-success rounded-pill" type="submit">ค้นหา</button>
+            <div class="secone">
+              <button button class="btn text-light rounded-pill" type="submit">ค้นหา</button>
+            </div>
           </form>
       </li>
         <?php if(isset($_SESSION['userID'])) { ?>

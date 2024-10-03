@@ -77,3 +77,10 @@ footer {
 .secone {
     margin-right: 20px;
 }
+
+.secone {
+    width: 80px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #F0A04B;
+}

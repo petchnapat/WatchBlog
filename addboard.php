@@ -113,18 +113,18 @@
             <div class="col-lg-3 "> 
             </div>
             <div class="col-lg-6">
-            <h3 class="card-title text-center ">เพิ่มบอร์ด</h3>
+            <h3 class="card-title text-center ">เพิ่มบล็อด</h3>
                 <div class="boxcard">
                     <div class="card-body">
                         <p class="card-text form-inline">
                             <div class="mb-3 row">
-                            <label for="email" class="col-sm-3 col-form-label text-while">ห้อข้อบอร์ด</label>
+                            <label for="email" class="col-sm-3 col-form-label text-while">ห้อข้อบล็อด</label>
                                 <div class="col-sm-12 ">
                                 <input type="text"  class="form-control " id="boardHeader" name="boardHeader" placeholder="Enter Board Header" value="" >
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label for="userPassword" class="col-sm-3 col-form-label" >เนื้อหาบอร์ด</label>
+                                <label for="userPassword" class="col-sm-3 col-form-label" >เนื้อหาบล็อด</label>
                                 <div class="col-sm-12">
                                 <textarea class="form-control" name="boardBody" id="boardBody" aria-label="With textarea" placeholder="Enter Board Body"></textarea>
                                 </div>
@@ -143,7 +143,7 @@
                                 <input class="form-control form-control-sm" id="boardImage" name="boardImage" type="file">
                             </div>
                             <div class="row ">
-                                <div class="col-sm-12"> <button type="submit" class="btn btn-warning w-100" >โพสต์บอด</button></div>
+                                <div class="col-sm-12"> <button type="submit" class="btn btn-warning w-100" >โพสต์บล็อด</button></div>
                             </div>
                         </p>
                     </div>
