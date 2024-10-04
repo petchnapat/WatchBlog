@@ -97,7 +97,7 @@
     <?php require 'req/navbar.php' ?>
     <div class="container-fluid mt-5 mb-2">
     <form method="post">
-        <div class="row mt-4">
+        <div class="row ">
             <div class="col-lg-4 "> 
             </div>
             <div class="col-lg-4">

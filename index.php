@@ -43,7 +43,7 @@ connect();
         FROM board INNER JOIN users ON users.userID = board.userID 
         INNER JOIN category ON category.categoryID = board.categoryID  
         ORDER BY board.boardDate DESC , board.boardTime DESC LIMIT 0,10 ';
-        $text = 'Blog Today';
+        $text = 'Blog Now';
     }
     
     $boardResult = mysqli_query($GLOBALS['conn'],$sql);
@@ -223,15 +223,17 @@ connect();
                      <?php } ?>
                 </div> 
             </div>
-            <div class="col-lg-2"></div> 
+            <div class="col-lg-2"></div>
+            <?php if($text!='Blog All') {  ?>
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
                 <form method="post">
                     <input type="hidden" id="all" name="all" value="1" >
-                    <button type="submit" class=" btn text-light btn-lg w-100 rounded-pill bg-warning">แสดงบอร์ดทั้งหมด</button>
+                    <button type="submit" class=" btn text-light btn-lg w-100 rounded-pill bg-warning">แสดงบล็อดทั้งหมด</button>
                 </form>
             </div>
             <div class="col-sm-2"></div>
+            <?php } ?>
         </div>
         </div>
     <?php require 'req/footer.php' ?>

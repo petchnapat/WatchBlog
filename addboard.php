@@ -30,6 +30,8 @@
                             });
                         });
                     </script>';
+                    }else if(@$_SESSION['userID']==''){
+                        header('refresh:0 ;url=index.php');
                     }else{
                         $boardHeader = $_POST['boardHeader'];
                         $boardBody = $_POST['boardBody'];

@@ -27,7 +27,7 @@
                         });
                     </script>'; 
                 unset($_SESSION['delete']);
-            }
+            } 
             
             $boardID = $_GET['boardID'];
             $boardSql = 'SELECT board.boardHeader, board.boardBody,board.userID AS userBoardID, board.categoryID,board.boardImage,board.boardDate,board.boardTime ,
@@ -40,14 +40,16 @@
             $prepareboard->execute();
             $result =$prepareboard->get_result();
             if($result->num_rows == 0) {
-                header('refresh:0 ; url=index.php');
+                header('refresh:0 ;');
             }
              $board =  $result->fetch_assoc();
              $comment = countRow('comment','boardID',$_GET['boardID']);
             // User Comment 
             if(isset($_POST['commentDetail'])) {
-
-                if($_POST['commentDetail']=='') {
+                if(@$_SESSION['userID']==''){
+                    header('refresh:0 ;');
+                    
+                } else if($_POST['commentDetail']=='') {
                     echo ' <script>
                             $(function() {
                                 Swal.fire({
