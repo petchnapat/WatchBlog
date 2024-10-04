@@ -18,7 +18,7 @@
         $search = '';
         $count = 0;
     }else{
-        $text =   $_POST['search'].'%';
+        $text =   '%'.$_POST['search'].'%';
         $search =  ' WHERE board.boardHeader LIKE ? || category.categoryName LIKE ?
         || users.email  LIKE  ?  || users.firstName LIKE  ? OR users.lastName LIKE ? ';
         $board['img']='';
