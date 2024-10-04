@@ -13,6 +13,9 @@
     <?php 
             require 'db/db_connect.php';
             connect();
+            if(empty($_GET)){
+                    header('refresh:0; url=index.php');
+            }
             $sql1 = 'SELECT * FROM category';
             $result1 = mysqli_query($GLOBALS['conn'],$sql1);
             $boardID = $_GET['boardID'];
