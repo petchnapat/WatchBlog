@@ -13,7 +13,12 @@
     <?php 
             require 'db/db_connect.php';
             connect();
-            $loginUserID = $_SESSION['userID'];
+            if(@$_SESSION['userID']==''){
+                header('refresh:0;url=index.php');
+            }else{
+                $loginUserID = $_SESSION['userID'];
+            }
+            
             $DataUserLoginSql = 'SELECT * FROM users WHERE userID = ? ';
             $prepareDataUserLogin = $GLOBALS['conn']->prepare($DataUserLoginSql); 
             $prepareDataUserLogin->bind_param("i",$loginUserID);

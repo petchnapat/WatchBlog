@@ -13,90 +13,95 @@
     <?php 
             require 'db/db_connect.php';
             connect();
-            if(@$_SESSION['delete']==1) {
-                echo ' <script>
-                        $(function() {
-                             Swal.fire({
-                                showCancelButton: true,
-                                 showConfirmButton: false,
-                                cancelButtonText: "ปิด",
-                                title: "ลบคอมเม้นสำเร็จ !",
-                              text: "",
-                              icon: "success"
-                             });
-                        });
-                    </script>'; 
-                unset($_SESSION['delete']);
-            } 
-            
-            $boardID = $_GET['boardID'];
-            $boardSql = 'SELECT board.boardHeader, board.boardBody,board.userID AS userBoardID, board.categoryID,board.boardImage,board.boardDate,board.boardTime ,
-                    users.firstName AS userBoardFirstName , users.lastName AS userBoardLastName , users.userImage ,
-                    category.categoryName 
-                    FROM board INNER JOIN users ON users.userID = board.userID AND board.boardID = ? 
-                    INNER JOIN category  ON category.categoryID = board.categoryID  WHERE board.boardID = ? ' ;
-            $prepareboard = $GLOBALS['conn']->prepare($boardSql);
-            $prepareboard->bind_param("ii",$boardID,$boardID);
-            $prepareboard->execute();
-            $result =$prepareboard->get_result();
-            if($result->num_rows == 0) {
-                header('refresh:0 ;');
-            }
-             $board =  $result->fetch_assoc();
-             $comment = countRow('comment','boardID',$_GET['boardID']);
-            // User Comment 
-            if(isset($_POST['commentDetail'])) {
-                if(@$_SESSION['userID']==''){
+            if(empty($_GET)){
+               header('refresh:0;url=index.php');
+            }else{
+                if(@$_SESSION['delete']==1) {
+                    echo ' <script>
+                            $(function() {
+                                 Swal.fire({
+                                    showCancelButton: true,
+                                     showConfirmButton: false,
+                                    cancelButtonText: "ปิด",
+                                    title: "ลบคอมเม้นสำเร็จ !",
+                                  text: "",
+                                  icon: "success"
+                                 });
+                            });
+                        </script>'; 
+                    unset($_SESSION['delete']);
+                } 
+                
+                $boardID = $_GET['boardID'];
+                $boardSql = 'SELECT board.boardHeader, board.boardBody,board.userID AS userBoardID, board.categoryID,board.boardImage,board.boardDate,board.boardTime ,
+                        users.firstName AS userBoardFirstName , users.lastName AS userBoardLastName , users.userImage ,
+                        category.categoryName 
+                        FROM board INNER JOIN users ON users.userID = board.userID AND board.boardID = ? 
+                        INNER JOIN category  ON category.categoryID = board.categoryID  WHERE board.boardID = ? ' ;
+                $prepareboard = $GLOBALS['conn']->prepare($boardSql);
+                $prepareboard->bind_param("ii",$boardID,$boardID);
+                $prepareboard->execute();
+                $result =$prepareboard->get_result();
+                if($result->num_rows == 0) {
                     header('refresh:0 ;');
-                    
-                } else if($_POST['commentDetail']=='') {
-                    echo ' <script>
-                            $(function() {
-                                Swal.fire({
-                                    showCancelButton: true,
-                                    showConfirmButton: false,
-                                    cancelButtonText: "ปิด",
-                                    title: "ไม่สามารถแสดงความคิดเห็นได้",
-                                    text: "ข้อความเป็นค่าว่าง กรุณากรอกข้อคิดเห็น !",
-                                    icon: "error"
-                                });
-                            });
-                            </script>';
-                }else{
-                    // INSERT Comment userID FROM $_SESSSINO['userID'] boardID FROM $_GET['boardID']
-                    $commnetSQL = 'INSERT INTO comment (userID,boardID,commentDetail,commentDate,commentTime) VALUES 
-                    ( '.$_SESSION['userID'].', '.$_GET['boardID'].',"'.$_POST['commentDetail'].'" , CURRENT_DATE  , CURRENT_TIME ) ';
-                   // echo $commnetSQL;
-                    $result = mysqli_query($GLOBALS['conn'],$commnetSQL);
-                    echo ' <script>
-                            $(function() {
-                                Swal.fire({
-                                    showCancelButton: true,
-                                    showConfirmButton: false,
-                                    cancelButtonText: "ปิด",
-                                    title: "แสดงความคิดเห็นสำเร็จ !",
-                                    text: "",
-                                    icon: "success"
-                                });
-                            });
-                            </script>';
-                            $comment = countRow('comment','boardID',$_GET['boardID']);
                 }
+                 $board =  $result->fetch_assoc();
+                 $comment = countRow('comment','boardID',$_GET['boardID']);
+                // User Comment 
+                if(isset($_POST['commentDetail'])) {
+                    if(@$_SESSION['userID']==''){
+                        header('refresh:0 ;');
+                        
+                    } else if($_POST['commentDetail']=='') {
+                        echo ' <script>
+                                $(function() {
+                                    Swal.fire({
+                                        showCancelButton: true,
+                                        showConfirmButton: false,
+                                        cancelButtonText: "ปิด",
+                                        title: "ไม่สามารถแสดงความคิดเห็นได้",
+                                        text: "ข้อความเป็นค่าว่าง กรุณากรอกข้อคิดเห็น !",
+                                        icon: "error"
+                                    });
+                                });
+                                </script>';
+                    }else{
+                        // INSERT Comment userID FROM $_SESSSINO['userID'] boardID FROM $_GET['boardID']
+                        $commnetSQL = 'INSERT INTO comment (userID,boardID,commentDetail,commentDate,commentTime) VALUES 
+                        ( '.$_SESSION['userID'].', '.$_GET['boardID'].',"'.$_POST['commentDetail'].'" , CURRENT_DATE  , CURRENT_TIME ) ';
+                       // echo $commnetSQL;
+                        $result = mysqli_query($GLOBALS['conn'],$commnetSQL);
+                        echo ' <script>
+                                $(function() {
+                                    Swal.fire({
+                                        showCancelButton: true,
+                                        showConfirmButton: false,
+                                        cancelButtonText: "ปิด",
+                                        title: "แสดงความคิดเห็นสำเร็จ !",
+                                        text: "",
+                                        icon: "success"
+                                    });
+                                });
+                                </script>';
+                                $comment = countRow('comment','boardID',$_GET['boardID']);
+                    }
+                }
+                // SELECT ALL comment ORDER BY DATE AND TIME
+                $commentDate = "commentDate";
+                $commentTime = "commentTime";
+                $getcommentSQL = 'SELECT * FROM comment WHERE boardID = ? ORDER BY  commentDate DESC , commentTime  DESC ';
+                $prepareComment = $GLOBALS['conn']->prepare($getcommentSQL);
+                $prepareComment->bind_param("i",$boardID);
+                $prepareComment->execute();
+                $resultComment = $prepareComment->get_result();
+                $prepareComment->close(); 
+               $prepareboard->close();
+               // Edit Comment
+               if(isset($_POST['editCommnet'])) {
+                echo' 123';
+               }
             }
-            // SELECT ALL comment ORDER BY DATE AND TIME
-            $commentDate = "commentDate";
-            $commentTime = "commentTime";
-            $getcommentSQL = 'SELECT * FROM comment WHERE boardID = ? ORDER BY  commentDate DESC , commentTime  DESC ';
-            $prepareComment = $GLOBALS['conn']->prepare($getcommentSQL);
-            $prepareComment->bind_param("i",$boardID);
-            $prepareComment->execute();
-            $resultComment = $prepareComment->get_result();
-            $prepareComment->close(); 
-           $prepareboard->close();
-           // Edit Comment
-           if(isset($_POST['editCommnet'])) {
-            echo' 123';
-           }
+            
     ?>
 </head>
 <body>
