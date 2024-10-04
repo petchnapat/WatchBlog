@@ -93,7 +93,7 @@
                                     showCancelButton: true,
                                     showConfirmButton: false,
                                     cancelButtonText: "ปิด",
-                                    title: "เพิ่มบอร์ดสำเร็จ !",
+                                    title: "เพิ่มบล็อดสำเร็จ !",
                                     text: "กรุณารอสักครู่ !",
                                     icon: "success"
                                 });

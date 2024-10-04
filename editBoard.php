@@ -62,7 +62,7 @@
                                                 showCancelButton: true,
                                                 showConfirmButton: false,
                                                 cancelButtonText: "ปิด",
-                                                title: "แก้ไขบอร์ดสำเร็จ !",
+                                                title: "แก้ไขบล็อดสำเร็จ !",
                                                 text: "กรุณารอสักครู่ !",
                                                 icon: "success"
                                             });

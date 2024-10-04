@@ -28,7 +28,7 @@
                 showCancelButton: true,
                 showConfirmButton: false,
                 cancelButtonText: "ปิด",
-                title: "ลบบอร์ดสำเร็จ",
+                title: "ลบบล็อดสำเร็จ",
                 text: "!",
                 icon: "success"
             });
