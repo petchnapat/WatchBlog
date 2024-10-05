@@ -79,7 +79,7 @@
                     if(@$_GET['admin']==1) {
                     header("refresh:2; url=adminComment.php");
                     }else{
-                    header("refresh:2; url=boardDetail.php?boardID= $boardID");
+                    header("refresh:2; url=boardDetail.php?boardID=$boardID");
                     }
 
                     }
